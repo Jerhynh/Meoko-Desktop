@@ -1,4 +1,6 @@
 ﻿using NyaaNet.Enums;
+using System.Net.Http.Headers;
+using System.Text;
 
 namespace NyaaNet
 {
@@ -10,28 +12,23 @@ namespace NyaaNet
         /// <summary>
         /// The address or "URI" of the server.
         /// </summary>
-        public string? ServerURI { get; set; }
+        internal static string? ServerURI { get; set; }
 
         /// <summary>
         /// The authentication method to be utilized when contacting the API server.
         /// </summary>
-        private AuthMethod ClientAuthMethod { get; set; }
+        internal static AuthMethod ClientAuthMethod { get; set; }
 
         /// <summary>
-        /// The username to be used when connecting via BasicAuth
+        /// The credential header to be attached to Basic Authentication requests.
         /// </summary>
-        private string? Username { get; set; }
-
-        /// <summary>
-        /// The password to be used when connecting via BasicAuth
-        /// </summary>
-        private string? Password { get; set; }
+        internal static string? AuthHeaderCredential { get; set; }
 
 
         /// <summary>
         /// The APIToken or authorization token supplied by the server in API key configurations to allow authenticated use of API endpoints.
         /// </summary>
-        public string? APIToken { get; set; }
+        internal static string? APIToken { get; set; }
 
         /// <summary>
         /// BasicAuth constructor for the APIClient class.
@@ -43,12 +40,31 @@ namespace NyaaNet
         public APIClient(string serverURI, string username, string password)
         {
             ServerURI = serverURI ?? throw new ArgumentNullException(nameof(serverURI));
-            Username = username ?? throw new ArgumentNullException(nameof(username));
-            Password = password ?? throw new ArgumentNullException(nameof(password));
+            string user = username ?? throw new ArgumentNullException(nameof(username));
+            string pass = password ?? throw new ArgumentNullException(nameof(password));
+
+            // Here we build our AuthHeader for BasicAuth requests.
+            AuthHeaderCredential = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{user}:{pass}"));
 
             if (ServerURI.EndsWith("/")) // strip '/' from rnd of URI to prevent URI mutilation.
                 ServerURI = ServerURI[..(ServerURI.Length - 1)];
             ClientAuthMethod = AuthMethod.BasicAuthentication;
+        }
+
+        /// <summary>
+        /// Querys the server's health endpoint. (Note): It is reccomended to call this upon startup to validate configuration.
+        /// </summary>
+        /// <returns>A response indicating whether the server is healthy and alive or not.</returns>
+        /// <exception cref="HttpRequestException">The server replied to the request with a non-success status code.</exception>
+        public async Task<string> HealthCheckAsync()
+        {
+            using var client = new HttpClient();
+            var url = $"{ServerURI}/";
+            if (ClientAuthMethod == AuthMethod.BasicAuthentication)
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", AuthHeaderCredential);
+            var response = await client.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadAsStringAsync();
         }
 
     }
