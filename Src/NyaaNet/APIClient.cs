@@ -67,5 +67,15 @@ namespace NyaaNet
             return await response.Content.ReadAsStringAsync();
         }
 
+        public async Task<string> SendRequestPayload()
+        {
+            using var client = new HttpClient();
+            var url = $"{ServerURI}/";
+            if (ClientAuthMethod == AuthMethod.BasicAuthentication)
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", AuthHeaderCredential);
+            var response = await client.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadAsStringAsync();
+        }
     }
 }
