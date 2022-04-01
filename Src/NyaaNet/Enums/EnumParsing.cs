@@ -6,7 +6,7 @@ namespace NyaaNet.Enums
     /// <summary>
     /// Parses enums to their mapped values.
     /// </summary>
-    public class EnumParsing
+    internal class EnumParsing
     {
         /// <summary>
         /// Parses an enum parameter to its mapped value.
