@@ -11,7 +11,7 @@
         eng,
 
         /// <summary>
-        /// Routes via the /nonEng/ sub category.
+        /// Routes via the /non-eng/ sub category.
         /// </summary>
         nonEng,
 
