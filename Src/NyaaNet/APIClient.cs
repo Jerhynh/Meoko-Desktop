@@ -70,10 +70,16 @@ namespace NyaaNet
         /// <summary>
         /// Sends an arbitrarily formed request payload to the API.
         /// </summary>
-        /// <returns>String representing API response.</returns>
-        public string SendRequestPayload()
+        /// <param name="requestURI"></param>
+        /// <returns>JSON string representing API response.</returns>
+        public async Task<string> SendRequestPayloadAsync(string requestURI)
         {
-            throw new NotImplementedException();
+            using var client = new HttpClient();
+            if (ClientAuthMethod == AuthMethod.BasicAuthentication)
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", AuthHeaderCredential);
+            var response = await client.GetAsync(requestURI);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadAsStringAsync();
         }
     }
 }
