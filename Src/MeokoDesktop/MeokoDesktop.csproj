@@ -5,6 +5,15 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>NyaaNet.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="NyaaNet.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NyaaNet\NyaaNet.csproj" />
+  </ItemGroup>
 
 </Project>

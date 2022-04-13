@@ -5,8 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MeokoDesktop"
         mc:Ignorable="d"
-        Title="Meoko Desktop" Height="450" Width="800">
+        Title="Meoko Desktop" Height="600" Width="1000" Background="#232323">
     <Grid>
-        
+        <Label Content="Enter a search query:" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="15" Margin="43,35,0,0"/>
+        <TextBox x:Name="SearchBar" KeyDown="SearchBar_KeyDown" AcceptsReturn="false" AcceptsTab="False" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="208,32,0,0" Width="660" Height="35" />
+        <Button Name="SearchBtn" Content="Search" Click="SearchBtn_Click" Margin="885,32,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35" Width="58"/>
+
+        <ListView Margin="43,100,57,39" x:Name="postArea">
+            <ListView.View>
+
+
+                <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Nyaa.si Search Results">
+
+                    <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Path=title}" Width="350"/>
+                    <GridViewColumn Header="Size" DisplayMemberBinding="{Binding Path=size}" Width="80"/>
+                    <GridViewColumn Header="URL" DisplayMemberBinding="{Binding Path=link}" Width="180"/>
+                </GridView>
+
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>
