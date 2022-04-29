@@ -1,6 +1,6 @@
 # NyaaNet
 
-NyaaNet is an easy to use api client built around the [Nyaa-Api-Go](https://github.com/Yash-Garg/Nyaa-Api-Go) server written by [Yash Garg](https://github.com/Yash-Garg). It's purpose is to provide an easy to use C# api to search for and sort torrents on Nyaa.si.
+NyaaNet is an easy to use api client built around the [Nyaa-Api-Go](https://github.com/Yash-Garg/Nyaa-Api-Go) server written by [Yash Garg](https://github.com/Yash-Garg). Its purpose is to provide an easy-to-use C# api to search for and sort torrents on Nyaa.si.
 
 # Building
 
