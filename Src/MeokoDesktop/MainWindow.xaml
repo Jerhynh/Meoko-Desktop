@@ -21,8 +21,12 @@
                     <GridViewColumn Header="Size" DisplayMemberBinding="{Binding Path=size}" Width="80"/>
                     <GridViewColumn Header="URL" DisplayMemberBinding="{Binding Path=link}" Width="180"/>
                 </GridView>
-
             </ListView.View>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown" />
+                </Style>
+            </ListView.ItemContainerStyle>
         </ListView>
     </Grid>
 </Window>

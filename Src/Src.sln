@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NyaaNet", "NyaaNet\NyaaNet.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NyaaNetTesting", "NyaaNetTesting\NyaaNetTesting.csproj", "{D3452AE7-A9DC-43A3-9ADD-FE87AEFDA253}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeokoDesktop", "MeokoDesktop\MeokoDesktop.csproj", "{FDE71467-E7BA-4B4E-B74F-B96870FF244B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NyaaNetSample", "MeokoDesktop\NyaaNetSample.csproj", "{FDE71467-E7BA-4B4E-B74F-B96870FF244B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
